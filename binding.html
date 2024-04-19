@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="" />
+    <title>Карта</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+      * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+
+      *,
+      *:before,
+      *:after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      :focus,
+      :active {
+        outline: none;
+      }
+
+      a:focus,
+      a:active {
+        outline: none;
+      }
+
+      nav,
+      footer,
+      header,
+      aside {
+        display: block;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-size: 100%;
+        line-height: 1;
+        -ms-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      input,
+      button,
+      textarea {
+        font-family: inherit;
+      }
+
+      input::-ms-clear {
+        display: none;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+
+      a,
+      a:visited {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      img {
+        vertical-align: top;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      :root {
+        /* Font size */
+        --font-size-input: 1.25rem;
+
+        /* All colors */
+        --color-1: #afb0c8;
+        --color-2: #565d93;
+        --color-3: #f2b943;
+        --color-4: #f3f4f2;
+        --color-5: #e76769;
+        --color-6: #ffffff;
+        --color-7: #2c2e40;
+        --color-8: #dee3e6;
+        --color-9: #636263;
+        --color-10: #75bc6a;
+        --color-11: #ccd5da;
+        --color-12: #af4c4e;
+        --color-13: #959da1;
+        --color-14: #51546e;
+
+        /* Fonts colors */
+        --font-color-primary: #2c2e40;
+        --font-color-logo: #2c2e40;
+        --font-color-title: #2c2e40;
+
+        /* Color Button */
+        --button-font-color-primary: #ffffff;
+        --button-color-primary: #e76769;
+        --button-color-primary-stroke: #af4c4e;
+        --button-color-primary-hover: #af4c4e;
+
+        --button-font-color-secondary: #959da1;
+        --button-color-secondary: #f3f4f2;
+        --button-color-secondary-stroke: #dee3e6;
+        --button-color-secondary-hover: #dee3e6;
+
+        /* Background colors */
+        --background-color-primary: #ffffff;
+
+        /* Z-index */
+        --header-z-index: 1998;
+        --header-menu-z-index: 1999;
+        --popup-z-index: 1999;
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--font-color-primary);
+        background-color: var(--background-color-primary);
+      }
+
+      .form__group {
+        margin: 0 0 30px 0;
+      }
+
+      @media (min-width: 768px) {
+        .form__group > .title {
+          margin: 0 0 20px 0;
+          font-size: 25px;
+        }
+      }
+
+      .form__input:not(:last-child),
+      .form__select:not(:last-child) {
+        margin: 0 0 15px 0;
+      }
+
+      .form__notification {
+        display: block;
+        font-size: 0.917em;
+        font-weight: 500;
+        line-height: 1.16;
+        color: var(--color-5);
+      }
+
+      .form__buttons {
+        margin: 20px 0 0 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .form__button {
+        flex: 0 1 15rem;
+      }
+
+      /* input */
+
+      .input {
+        font-size: var(--font-size-input);
+        color: var(--font-color-primary);
+      }
+
+      .input.error .input__error {
+        display: block;
+      }
+
+      .input.error .input__main {
+        border-color: var(--color-5);
+      }
+
+      @media (any-hover: hover) {
+        .input.error .input__main:hover {
+          border-color: var(--color-13);
+        }
+      }
+
+      .input__label {
+        margin: 0 0 0.5em 0;
+        display: block;
+        font-size: 0.7em;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 1.16;
+        color: inherit;
+      }
+
+      .input__label_required::after {
+        content: '*';
+        padding: 0 0 0 0.1em;
+        font-size: 1em;
+        color: var(--color-5);
+      }
+
+      .input__main {
+        width: 100%;
+        min-height: 2em;
+        padding: 0 0.75em;
+        display: block;
+        font-size: 1em;
+        font-weight: 500;
+        line-height: 1.16;
+        color: inherit;
+        border: 1px solid var(--color-8);
+        border-radius: 0.35em;
+        transition: border 0.15s linear;
+      }
+
+      @media (any-hover: hover) {
+        .input__main:hover {
+          border-color: var(--color-13);
+        }
+      }
+
+      .input__main::-moz-placeholder {
+        color: var(--color-13);
+      }
+
+      .input__main::placeholder {
+        color: var(--color-13);
+      }
+
+      .input__main:focus {
+        border-color: var(--color-13);
+      }
+
+      textarea.input__main {
+        padding: 0.6em 0.75em;
+        height: 4.35em;
+        resize: none;
+      }
+
+      @media (min-width: 768px) {
+        textarea.input__main {
+          height: 6em;
+        }
+      }
+
+      .input__info,
+      .input__error {
+        margin: 0.545em 0 0 0;
+        display: block;
+        font-size: 0.55em;
+        font-weight: 500;
+        line-height: 1.16;
+      }
+
+      .input__info {
+        color: var(--color-13);
+      }
+
+      .input__error {
+        display: none;
+        color: var(--color-5);
+      }
+
+      /* button */
+
+      .button {
+        width: 100%;
+        min-height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--button-font-color-primary);
+        border-radius: 7px;
+        background-color: var(--button-color-primary);
+        box-shadow: 0px -2px 0px 0px var(--button-color-primary-stroke) inset;
+        transition: box-shadow 0.1s linear;
+        outline: none;
+        border: none;
+      }
+
+      @media (any-hover: hover) {
+        .button:hover {
+          box-shadow: 0px -70px 0px 0px var(--button-color-primary-stroke) inset;
+        }
+      }
+
+      .button_secondary {
+        color: var(--button-font-color-secondary);
+        background-color: var(--button-color-secondary);
+        box-shadow: 0px -2px 0px 0px var(--button-color-secondary-stroke) inset;
+      }
+
+      @media (any-hover: hover) {
+        .button_secondary:hover {
+          box-shadow: 0px -70px 0px 0px var(--button-color-secondary-stroke) inset;
+        }
+      }
+
+      .button_sm {
+        width: auto;
+        min-height: 40px;
+        padding: 0 2.5em;
+        font-size: 0.75rem;
+      }
+
+      .main-view-container {
+        padding: 25px;
+      }
+
+      @media (min-width: 768px) {
+        .main-view-container {
+          width: 100%;
+          max-width: 600px;
+          padding: 25px;
+          margin: 0 auto;
+          border-radius: 10px;
+          border: 1px solid var(--color-8);
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .main-view-container {
+          padding: 35px;
+          border-radius: 15px;
+        }
+      }
+
+      @media (min-width: 1600px) {
+        .main-view-container {
+          padding: 50px;
+          border-radius: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <main class="content">
+        <section class="binding">
+          <div class="binding__wrapper">
+            <form class="main-view-container binding__form form">
+              <div class="form__group">
+                <div class="form__inputs">
+                  <div class="form__input input" data-input-required>
+                    <span class="input__label input__label_required"
+                      >Номер карты</span
+                    >
+                    <input
+                      tabindex="1"
+                      id="card-number"
+                      class="input__main"
+                      type="tel"
+                      placeholder="0000 0000 0000 0000 000"
+                    />
+                  </div>
+                  <div class="form__input input" data-input-required>
+                    <span class="input__label input__label_required"
+                      >Срок действия</span
+                    >
+                    <input
+                      tabindex="2"
+                      id="card-date"
+                      class="input__main"
+                      type="tel"
+                      placeholder="ММ/ГГ"
+                    />
+                  </div>
+                  <div class="form__input input" data-input-required>
+                    <span class="input__label input__label_required">CVV</span>
+                    <input
+                      tabindex="3"
+                      id="card-cvv"
+                      class="input__main"
+                      type="password"
+                      placeholder="***"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form__buttons">
+                <button
+                  id="card-submit"
+                  class="form__button button"
+                  type="submit"
+                >
+                  Привязать
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+      const instanceMasks = {
+        number: null,
+        date: null,
+        cvv: null,
+      };
+
+      const cls = {
+        inputParent: 'input',
+        error: 'error',
+      };
+
+      /* Вспомогательные */
+      const inputForAllInputs = () => {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((input) => {
+          input.addEventListener('input', (event) => {
+            removeErrorForInput(input);
+          });
+        });
+      };
+
+      const setErrorForInput = (input) => {
+        if (!input) return;
+
+        const parent = input.closest(`.${cls.inputParent}`);
+        if (parent) parent.classList.add(cls.error);
+      };
+
+      const removeErrorForInput = (input) => {
+        if (!input) return;
+
+        const parent = input.closest(`.${cls.inputParent}`);
+        if (parent) parent.classList.remove(cls.error);
+      };
+
+      const selectPrevTabindex = (input) => {
+        if (!input) return;
+
+        input.addEventListener('keydown', (event) => {
+          console.log(event.code === 'Backspace' && !input.value.length);
+        });
+      };
+
+      /* Маски */
+      const cardNumber = () => {
+        const input = document.querySelector('#card-number');
+        if (!input) return;
+
+        const nextInput = document.querySelector('input[tabindex="2"]');
+
+        instanceMasks.number = IMask(input, {
+          mask: '0000 0000 0000 0000 000',
+          lazy: false,
+        });
+
+        input.addEventListener('input', (event) => {
+          if (instanceMasks.number.unmaskedValue.length < 19) return;
+
+          if (nextInput) nextInput.focus();
+        });
+      };
+
+      const cardDate = () => {
+        const input = document.querySelector('#card-date');
+        if (!input) return;
+
+        const prevInput = document.querySelector('input[tabindex="1"]');
+        const nextInput = document.querySelector('input[tabindex="3"]');
+
+        instanceMasks.date = IMask(input, {
+          mask: 'MM/YY',
+
+          blocks: {
+            MM: {
+              mask: IMask.MaskedRange,
+              from: 1,
+              to: 12,
+            },
+
+            YY: {
+              mask: '00',
+            },
+          },
+
+          lazy: false,
+        });
+
+        input.addEventListener('keydown', (event) => {
+          const length = instanceMasks.date.unmaskedValue.length;
+
+          if (event.code === 'Backspace' && !length) {
+            if (prevInput) prevInput.focus();
+          }
+        });
+
+        input.addEventListener('input', (event) => {
+          const length = instanceMasks.date.unmaskedValue.length;
+
+          if (length < 4) return;
+
+          if (nextInput) nextInput.focus();
+        });
+      };
+
+      const cardCVV = () => {
+        const input = document.querySelector('#card-cvv');
+        if (!input) return;
+
+        const prevInput = document.querySelector('input[tabindex="2"]');
+
+        instanceMasks.cvv = IMask(input, {
+          mask: '000',
+        });
+
+        input.addEventListener('keydown', (event) => {
+          const length = instanceMasks.cvv.unmaskedValue.length;
+
+          if (event.code === 'Backspace' && !length) {
+            if (prevInput) prevInput.focus();
+          }
+        });
+      };
+
+      /* Валидация */
+      const isCardNumberValid = () => {
+        const input = instanceMasks.number.el.input;
+        if (!input) return false;
+        if (instanceMasks.number.unmaskedValue.length === 19) return true;
+
+        setErrorForInput(input);
+        return false;
+      };
+
+      const isCardDateValid = () => {
+        const input = instanceMasks.date.el.input;
+        if (!input) return;
+
+        let [inputMonth, inputYear] = instanceMasks.date.value.split('/');
+
+        const month = +inputMonth;
+        const year = +`20${inputYear}`;
+
+        const currentDate = new Date();
+        const inputDate = new Date(year, month, 0);
+
+        if (currentDate < inputDate) return true;
+
+        setErrorForInput(input);
+        return false;
+      };
+
+      const isCardCVVValid = () => {
+        const input = instanceMasks.cvv.el.input;
+        if (!input) return false;
+
+        if (instanceMasks.cvv.unmaskedValue.length === 3) return true;
+
+        setErrorForInput(input);
+        return false;
+      };
+
+      /* Отправка формы */
+      const cardSubmit = () => {
+        const button = document.querySelector('#card-submit');
+        if (!button) return;
+
+        button.addEventListener('click', (event) => {
+          const isValidNumber = isCardNumberValid();
+          const isValidDate = isCardDateValid();
+          const isValidСCVV = isCardCVVValid();
+
+          if (!isValidNumber || !isValidDate || !isValidСCVV) {
+            event.preventDefault();
+          }
+        });
+      };
+
+      /* Инициализация */
+      inputForAllInputs();
+      cardNumber();
+      cardDate();
+      cardCVV();
+      cardSubmit();
+    </script>
+  </body>
+</html>
